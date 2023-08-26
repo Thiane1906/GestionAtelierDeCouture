@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ArticleResource;
 use App\Models\Article;
+use App\Models\Categorie;
+use App\Models\Fournisseur;
 use Illuminate\Http\Request;
+use App\Http\Resources\ArticleResource;
+use App\Http\Resources\CategorieResource;
 
 class ArticleController extends Controller
 {
@@ -22,7 +25,34 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "libelle" => "required|alpha|min:3|unique:fournisseurs",
+            "prix"=>"required",
+            "stock"=>"required",
+            "categorie_id"=>"required"
+
+        ]);
+        
+        $article = Article::firstOrCreate([
+            "libelle"=>$request->libelle,
+            "prix"=>$request->prix,
+            "stock"=>$request->stock,
+            "categorie_id"=>$request->categorie_id
+        ]);
+        $article->fournisseurs()->attach($request->idsFour);
+        return response()->json([
+            "data"=>$article,
+            "message"=>"article ajouté avec succès",
+            "success"=>true
+         ]);
+    }
+
+    public function articleFournisseur(){
+        $data=[];
+        $category = CategorieResource::collection(Categorie::all())  ;
+        $fournisseur=Fournisseur::all();
+        $data=$category.$fournisseur;
+         return $data;
     }
 
     /**
@@ -41,15 +71,15 @@ class ArticleController extends Controller
         $article->update($request->only("libelle","prix","stock"));
         return $article;
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Article $article)
     {
-        $article->delete();
+       return $article->delete();
     }
-    // getNbreDeLibelleDuneCategorie(){
-
+    // public function getNbreDeLibelleDuneCategorie(Request $request ,$id){
+        
+    //     return count(Article::where("categorie_id",$request->id)->get());
     // }
 }

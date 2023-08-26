@@ -19,7 +19,7 @@ class ArticleResource extends JsonResource
             "libelle"=>$this->libelle,
             "prix"=>$this->prix,
             "stock"=>$this->stock,
-            "categorie"=>(new CategorieResource($this->categorie))
+            "categorie"=>new CategorieResource($this->categorie)
         ];
     }
 }

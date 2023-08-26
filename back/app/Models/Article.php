@@ -19,4 +19,7 @@ class Article extends Model
     public function categorie(){
         return $this->belongsTo(Categorie::class);
     }
+    public function aticlesVente(){
+        return $this->belongsToMany(ArticleVente::class,"ventes");
+    }
 }

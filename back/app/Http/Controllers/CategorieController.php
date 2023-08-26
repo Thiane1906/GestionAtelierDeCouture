@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategorieResource;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 
@@ -9,16 +10,14 @@ use Illuminate\Http\Request;
 class CategorieController extends Controller
 {
     
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       return Categorie::paginate(3);
-        //   return Categorie::all();
+       return CategorieResource::collection(Categorie::paginate(5));
+        //   return Categorie::paginate(3);
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -52,7 +51,6 @@ class CategorieController extends Controller
             "message"=>"libelle trouvé", 
             "data"=>$data,
          ]);
-
     }
 
     /**
