@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategorieResource extends JsonResource
+class VenteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +15,10 @@ class CategorieResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            // "nbreArticles"=>count(Article::where("categorie_id",$this->id)->get()),
             "id"=>$this->id,
-            "libelle" => $this->libelle
+			"article_id"=>$this->article_id,
+			// "article_vente_id"=>$this->article_vente_id,
+			"qte"=>$this->qte,
         ];
     }
 }

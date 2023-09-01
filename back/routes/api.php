@@ -23,6 +23,7 @@ Route::apiResource("articles",ArticleController::class);
 Route::get("categorie/{id}",[ArticleController::class,"getNbreDeLibelleDuneCategorie"]);
 Route::get("catFour",[ArticleController::class,"articleFournisseur"]);
 Route::apiResource("articleVente",ArticleVenteController::class);
+Route::get("articleConf",[ArticleVenteController::class,"getArticleConf"]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

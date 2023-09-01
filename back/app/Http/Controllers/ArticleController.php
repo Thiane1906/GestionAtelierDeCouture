@@ -29,7 +29,8 @@ class ArticleController extends Controller
             "libelle" => "required|alpha|min:3|unique:fournisseurs",
             "prix"=>"required",
             "stock"=>"required",
-            "categorie_id"=>"required"
+            "categorie_id"=>"required",
+            "photo"=>"required"
 
         ]);
         
@@ -37,7 +38,8 @@ class ArticleController extends Controller
             "libelle"=>$request->libelle,
             "prix"=>$request->prix,
             "stock"=>$request->stock,
-            "categorie_id"=>$request->categorie_id
+            "categorie_id"=>$request->categorie_id,
+            "photo"=>$request->photo
         ]);
         $article->fournisseurs()->attach($request->idsFour);
         return response()->json([

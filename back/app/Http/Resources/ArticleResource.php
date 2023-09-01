@@ -16,10 +16,12 @@ class ArticleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "id" => $this->id,
             "libelle"=>$this->libelle,
             "prix"=>$this->prix,
             "stock"=>$this->stock,
-            "categorie"=>new CategorieResource($this->categorie)
+            "categorie"=>new CategorieResource($this->categorie),
+            // "qte"=>$this->pivot->qte,
         ];
     }
 }

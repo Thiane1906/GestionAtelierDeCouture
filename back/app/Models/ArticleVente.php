@@ -12,6 +12,15 @@ class ArticleVente extends Model
 
     ];
     public function articles(){
-        return $this->belongsToMany(Article::class,"ventes");
+        return $this->belongsToMany(Article::class,"ventes")->withPivot("qte");
     }
+
+    // public function ventes(){
+    //     return $this->hasMany(Vente::class);
+    // }
+
+    public function categorie(){
+        return $this->belongsTo(Categorie::class);
+    }
+
 }

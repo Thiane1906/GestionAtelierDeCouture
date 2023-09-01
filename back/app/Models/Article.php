@@ -22,4 +22,7 @@ class Article extends Model
     public function aticlesVente(){
         return $this->belongsToMany(ArticleVente::class,"ventes");
     }
+    public function fournisseurs(){
+        return $this->belongsToMany(Fournisseur::class,"approvisionnements");
+    }
 }
